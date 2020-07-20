@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home | My Blog
+{% endblock title %}
+
+{% block content %}
+
+
+    <!-- Page Content -->
+    <!---------------------------------------------- Banner Starts Here -------------------------------------------------------------->
+    <div class="banner header-text">
+      <div class="owl-banner owl-carousel">
+        <div class="banner-item-01">
+          <div class="text-content">
+            <h2>It Starts with you</h2></br>
+            <a class="btn btn-primary btn-l text-uppercase js-scroll-trigger" style="background-color: #E84342; margin-left: 300px;" href="#services">Tell Me More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-------------------------------------------- Banner Ends Here ------------------------------------------------------------------>
+
+
+
+    <!------------------------------------------ Services Section --------------------------------------------------------------------->
+
+
+
+
+
+    <!-----------------------------Benefits of Ride Sharing Section ------------------------------------------->
+<!--  <section class="page-section" id="services">-->
+<!--    <div class="container">-->
+<!--      <div class="row">-->
+<!--        <div class="col-lg-12 text-center">-->
+<!--          <h2 class="section-heading text-uppercase" style="text-align: center;">Benefits of ride sharing</h2>-->
+<!--          <h3 class="section-subheading text-muted">We do what we can do</h3>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="row text-center">-->
+<!--        <div class="col-md-4">-->
+<!--          <span class="fa-stack fa-4x">-->
+<!--            <i class="fa fa-circle fa-stack-2x text-primary"></i>-->
+<!--            <i class="fa fa-users fa-stack-1x fa-inverse"></i>-->
+<!--          </span>-->
+<!--          <h4 class="service-heading">Relax While Commuting</h4>-->
+
+<!--          <p class="text-muted">Meet people with common interests and enjoy your commute</p></br>-->
+
+<!--        </div>-->
+<!--        <div class="col-md-4">-->
+<!--          <span class="fa-stack fa-4x">-->
+<!--            <i class="fa fa-circle fa-stack-2x text-primary"></i>-->
+<!--            <i class="fa fa-money fa-stack-1x fa-inverse"></i>-->
+<!--          </span>-->
+<!--          <h4 class="service-heading">Save Money</h4>-->
+<!--          <p class="text-muted">Save your money on transportation, gas, parking and maintenance </p></br>-->
+
+<!--        </div>-->
+<!--        <div class="col-md-4">-->
+<!--          <span class="fa-stack fa-4x">-->
+<!--            <i class="fa fa-circle fa-stack-2x text-primary"></i>-->
+<!--            <i class="fa fa-pagelines fa-stack-1x fa-inverse"></i>-->
+<!--          </span>-->
+<!--          <h4 class="service-heading">Reduce Carbon Emissions</h4>-->
+<!--          <p class="text-muted">By carpooling, you can reduce your carbon footprint.</p></br>-->
+
+<!--          </a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </section>-->
+<!---------------------------------------------- Section Over ------------------------------------------------>
+
+{% if user.is_authenticated %}
+<section class="page-section" id="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase" style="text-align: center;">Today's Blogs</h2>
+          <h3 class="section-subheading text-muted">Spread the happiness...</h3>
+        </div>
+      </div>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+
+                <!-- Side Widget -->
+<!--      <div class="card my-4">-->
+<!--          <h5 class="card-header text-center">Logged in Information</h5>-->
+<!--          <div class="card-body">-->
+<!--            <ul class="list-unstyled mb-0">-->
+<!--                <li>-->
+<!--                    <p> <strong>Username:</strong> My Username </p>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <p> <strong>Email:</strong> My Password</p>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-8">
+
+        {% for blog in blog_entries %}
+
+          <!-- Blog Post -->
+          <div class="card mb-4 mt-4">
+            <div class="card-body">
+              <h2 class="card-title">{{blog.blog_title}}</h2>
+              <p class="card-text">{{blog.blog_text | truncatechars:100}}</p>
+              {% comment %} <a href="#" class="btn btn-primary btn-sm">Read More &rarr;</a> {% endcomment %}
+            </div>
+            <div class="card-footer text-muted">
+              Posted on {{blog.blog_date}} by
+              <span class= "text-info mr-2">{{blog.blog_author}}</span>
+            </div>
+          </div>
+
+        {% endfor %}
+
+    {% if is_paginated %}
+        <!-- Pagination -->
+        <ul class="pagination justify-content-center mb-4">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{page_obj.previous_page_number}}">&larr; Previous Page</a>
+          </li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{page_obj.next_page_number}}">Next Page &rarr;</a>
+          </li>
+        {% endif %}
+        </ul>
+    {% endif %}
+
+      </div>
+
+        <div class="col-md-2"></div>
+       <!-- Sidebar Widgets Column -->
+    </div>
+    </div>
+</section>
+{% else %}
+
+<!--------------------------------------- How We Work Section ------------------------------------------------>
+<section class="page-section" id="services">
+    <div class="container">
+      <div class="row">
+          <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase" style="text-align: center;">Create your blog</h2>
+          <h3 class="section-subheading text-muted">Publish your passion, your way</h3>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-md-6">
+          <span class="fa-stack fa-4x">
+            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+            <i class="fa fa-sign-in fa-stack-1x fa-inverse"></i>
+          </span>
+          <h4 class="service-heading">Already have an account?</h4>
+          <p class="text-muted">Login to your account and grab the exclusive offers and deals. Subscribe a best, convenient and efficient ride for your destination !!!</p></br>
+          <a class="btn btn-primary btn-l text-uppercase js-scroll-trigger" style="background-color: #E84342;" href="/accounts/login/"> Login &nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+
+
+              <div  class="col-md-6">
+          <span class="fa-stack fa-4x">
+            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+            <i class="fa fa-user-plus fa-stack-1x fa-inverse"></i>
+          </span>
+          <h4 class="service-heading">Create an account!!</h4>
+          <p class="text-muted">Join the best car pooling community and uncovers the exclusive offers and deals, specially made for you, We are here to help you always !!!</p></br>
+          <a class="btn btn-primary btn-l text-uppercase js-scroll-trigger" style="background-color: #E84342;" href="/accounts/signup/"> Sign Up &nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+<!--------------------------------------- Section Over ------------------------------------------------>
+
+{% endif %}
+
+
+
+
+
+
+{% endblock content %}
+
+{% block extra_js %}
+
+{% endblock extra_js %}
